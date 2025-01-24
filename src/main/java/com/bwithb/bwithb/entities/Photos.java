@@ -1,16 +1,19 @@
 package com.bwithb.bwithb.entities;
 
 import java.util.UUID;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "Photos")
 public class Photos {
     @Id
     private UUID id;
-    private UUID Listings_id;
+   
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "listsing_id", referencedColumnName = "id")
+    private Listings listing_id;
   
     public Photos() {
     }
@@ -18,10 +21,9 @@ public class Photos {
     
 //id, Listings_id
 
-public Photos(UUID id, UUID Listings_id) {
+public Photos(UUID id) {
     super();
     this.id = id;
-    this.Listings_id = Listings_id;
 }
 
 public UUID getId() {
@@ -32,18 +34,18 @@ public void setId(UUID id) {
     this.id = id;
 }
 
-public UUID getListings_id() {
-    return Listings_id;
+public Listings getListing_id() {
+    return listing_id;
 }
 
-public void setListings_id(UUID Listings_id) {
-    this.Listings_id = Listings_id;
+public void setListing_id(Listings listing_id) {
+    this.listing_id = listing_id;
 }
 
 //id, Users_id
 
 @Override
 public String toString() {
- return "Role [id=" + id + ", Listings_id=" + Listings_id + "]";
+ return "Role [id=" + id + "]";
 }
 }

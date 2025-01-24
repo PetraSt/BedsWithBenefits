@@ -1,24 +1,33 @@
 package com.bwithb.bwithb.entities;
+import java.util.ArrayList;
 import java.util.UUID;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "Listings")
 public class Listings {
     @Id
     private UUID id;
+    @NotNull
     private String title;
+    @NotNull
     private String description ;
+    @NotNull
     private String location;
+    @NotNull
     private float price;
+    @NotNull
     private int max_guests;
+
+    @OneToMany(mappedBy = "listing_id")
+    private ArrayList<Photos> photos;
+
 
     public Listings(){
 
     }
-    public Listings(UUID id, String title, String description, String location, float price, int max_guests) {
+    public Listings(UUID id, String title, String description, String location, float price, int max_guests, ArrayList<Photos> photos) {
         super();
         this.id = id;
         this.title = title;
@@ -26,6 +35,7 @@ public class Listings {
         this.location = location;
         this.price = price;
         this.max_guests = max_guests;
+        this.photos=photos;
     }
 
     public UUID getId() {
@@ -76,9 +86,18 @@ public class Listings {
         this.max_guests = max_guests;
     }
 
+
+    public ArrayList<Photos> getPhotos(){
+        return photos;
+    }
+
+    public void setPhotos (ArrayList<Photos> photos){
+        this.photos =photos;
+    }
+
 // String title, String description, String location, float price, int max_guests
     @Override
     public String toString() {
-        return "Listings [id=" + id + ", title=" + title + ", description=" + description + ", location=" + location + ", price=" + price +  ", max_guests=" + max_guests +"]";
+        return "Listings [id=" + id + ", title=" + title + ", description=" + description + ", location=" + location + ", price=" + price +  ", max_guests=" + max_guests +", photos=" + photos +"]";
     }
 }
