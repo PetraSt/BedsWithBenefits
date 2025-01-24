@@ -2,24 +2,30 @@ package com.bwithb.bwithb.entities;
 
 
 import java.util.UUID;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "Role")
 public class Role {
     @Id
     private UUID id;
-    private UUID Users_id;
+
+    @NotNull
+    private String role_name;
+    
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private Users user_id;
   
     public Role() {
     }
 
-    public Role(UUID id, UUID Users_id) {
+    public Role(UUID id, String role_name) {
         super();
         this.id = id;
-        this.Users_id = Users_id;
+        this.role_name = role_name;
     }
 
     public UUID getId() {
@@ -30,18 +36,26 @@ public class Role {
         this.id = id;
     }
 
-    public UUID getUsers_id() {
-        return Users_id;
+    public String getRole_name() {
+        return role_name;
     }
 
-    public void setUsers_id(UUID Users_id) {
-        this.Users_id = Users_id;
+    public void setRole_name(String role_name) {
+        this.role_name = role_name;
+    }
+
+    public Users getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(Users user_id) {
+        this.user_id = user_id;
     }
 
  //id, Users_id
  
  @Override
  public String toString() {
-     return "Role [id=" + id + ", Users_id=" + Users_id + "]";
+     return "Role [id=" + id + ", role_name=" + role_name + "]";
  }
 }

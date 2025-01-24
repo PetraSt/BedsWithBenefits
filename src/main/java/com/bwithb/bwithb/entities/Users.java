@@ -1,28 +1,39 @@
 package com.bwithb.bwithb.entities;
 
+import java.util.ArrayList;
 import java.util.UUID;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "Users")
 public class Users {
     @Id
     private UUID id;
+    @NotNull
     private String name;
+    @NotNull
+    private String surname;
+    @NotNull
     private String email;
+    @NotNull
     private String password;
+
+    @OneToMany(mappedBy = "user_id")
+    private ArrayList<Role> roles;
 
     public Users() {
     }
 
-    public Users(UUID id, String name, String email, String password) {
+    public Users(UUID id, String name, String surname, String email, String password, ArrayList<Role> roles) {
         super();
         this.id = id;
         this.name = name;
+        this.surname = surname;
         this.email = email;
         this.password = password;
+        this.roles = roles;
     }
 
     public UUID getId() {
@@ -41,6 +52,14 @@ public class Users {
         this.name = name;
     }
 
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -57,8 +76,16 @@ public class Users {
         this.password = password;
     }
 
+    public ArrayList<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(ArrayList<Role> roles) {
+        this.roles = roles;
+    }
+
     @Override
     public String toString() {
-        return "Users [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + "]";
+        return "Users [id=" + id + ", name=" + name + ", surname=" + surname + ", email=" + email + ", password=" + password + "]";
     }
 }
