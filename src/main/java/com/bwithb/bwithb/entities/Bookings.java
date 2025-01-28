@@ -2,35 +2,43 @@ package com.bwithb.bwithb.entities;
 
 import java.sql.Date;//maybe it should be changed to util
 import java.util.UUID;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "Bookings")
 public class Bookings {
     @Id
     private UUID id;
-    private UUID Users_id;
-    private UUID Listings_id;
+    @NotNull
     private Date starting_date;
+    @NotNull
     private Date ending_date;
+    @NotNull
     private float total_cost;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "users_id", referencedColumnName = "id")
+    private Users users_id;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "listing_id", referencedColumnName = "id")
+    private Listings listing_id;
+
 
     public Bookings() {
 
     }
 
-    public Bookings(UUID id, UUID Users_id, UUID Listings_id, Date starting_date, Date ending_date, int total_cost) {
+    public Bookings(UUID id, Users users_id, Listings listing_id, Date starting_date, Date ending_date, int total_cost) {
         super();
         this.id = id;
-        this.Users_id = Users_id;
-        this.Listings_id = Listings_id;
+        this.users_id = users_id;
+        this.listing_id = listing_id;
         this.starting_date = starting_date;
         this.ending_date = ending_date;
         this.total_cost = total_cost;
     }
-    // "Users_id", "Listings_id", starting_date , ending_date , total_cost
 
     public UUID getId() {
         return id;
@@ -40,20 +48,20 @@ public class Bookings {
         this.id = id;
     }
 
-    public UUID getUsers_id() {
-        return Users_id;
+    public Users getUser_id() {
+        return users_id;
     }
 
-    public void setUsers_id(UUID Users_id) {
-        this.Users_id = Users_id;
+    public void setUser_id(Users users_id) {
+        this.users_id = users_id;
     }
 
-    public UUID getListings_id() {
-        return Listings_id;
+    public Listings getListing_id() {
+        return listing_id;
     }
 
-    public void setListings_id(UUID Listings_id) {
-        this.Listings_id = Listings_id;
+    public void setListing_id(Listings listing_id) {
+        this.listing_id = listing_id;
     }
 
     public Date getStarting_date() {
@@ -80,11 +88,11 @@ public class Bookings {
         this.total_cost = total_cost;
     }
 
-    // "Users_id", "Listings_id", starting_date , ending_date , total_cost
+    // "Users", "Listings", starting_date , ending_date , total_cost
 
     @Override
     public String toString() {
-        return "Listings [id=" + id + ", Users_id=" + Users_id + ", Listings_id=" + Listings_id + ", starting_date="
+        return "Listings [id=" + id + ", User=" + users_id + ", Listing=" + listing_id + ", starting_date="
                 + starting_date + ", ending_date=" + ending_date + ", total_cost=" + total_cost + "]";
     }
 

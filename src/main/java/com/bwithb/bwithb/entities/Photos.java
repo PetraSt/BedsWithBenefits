@@ -2,7 +2,6 @@ package com.bwithb.bwithb.entities;
 
 import java.util.UUID;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "Photos")

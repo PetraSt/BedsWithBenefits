@@ -20,8 +20,11 @@ public class Users {
     @NotNull
     private String password;
 
-    @OneToMany(mappedBy = "user_id")
+    @OneToMany(mappedBy = "users_id")
     private ArrayList<Role> roles;
+
+    @OneToMany(mappedBy = "users_id")
+    private ArrayList<Bookings> bookings;
 
     public Users() {
     }
@@ -84,8 +87,17 @@ public class Users {
         this.roles = roles;
     }
 
+    public ArrayList<Bookings> getBookings() {
+        return bookings;
+    }
+
+    public void setBookings(ArrayList<Bookings> bookings) {
+        this.bookings = bookings;
+    }
+
+
     @Override
     public String toString() {
-        return "Users [id=" + id + ", name=" + name + ", surname=" + surname + ", email=" + email + ", password=" + password + "]";
+        return "Users [id=" + id + ", name=" + name + ", surname=" + surname + ", email=" + email + ", password=" + password + ", bookings=" + bookings != null ? bookings.toString()  : "empty"  + "]";                                       
     }
 }

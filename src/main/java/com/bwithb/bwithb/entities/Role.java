@@ -16,8 +16,8 @@ public class Role {
     private String role_name;
     
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private Users user_id;
+    @JoinColumn(name = "users_id", referencedColumnName = "id")
+    private Users users_id;
   
     public Role() {
     }
@@ -44,15 +44,15 @@ public class Role {
         this.role_name = role_name;
     }
 
-    public Users getUser_id() {
-        return user_id;
+    public Users getUsers_id() {
+        return users_id;
     }
 
-    public void setUser_id(Users user_id) {
-        this.user_id = user_id;
+    public void setUsers_id(Users users_id) {
+        this.users_id = users_id;
     }
 
- //id, Users_id
+ //id, Userss_id
  
  @Override
  public String toString() {

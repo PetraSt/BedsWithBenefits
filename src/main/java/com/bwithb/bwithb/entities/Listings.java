@@ -23,6 +23,9 @@ public class Listings {
     @OneToMany(mappedBy = "listing_id")
     private ArrayList<Photos> photos;
 
+    @OneToMany(mappedBy = "listing_id")
+    private ArrayList<Bookings> bookings;
+
 
     public Listings(){
 
@@ -93,6 +96,14 @@ public class Listings {
 
     public void setPhotos (ArrayList<Photos> photos){
         this.photos =photos;
+    }
+
+    public ArrayList<Bookings> getBookings(){
+        return bookings;
+    }
+
+    public void setBookings (ArrayList<Bookings> bookings){
+        this.bookings =bookings;
     }
 
 // String title, String description, String location, float price, int max_guests
